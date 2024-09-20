@@ -23,7 +23,7 @@ root.render(
         <Route path='/feedback/create/:type' element={<CreateFeedback />} />
         <Route path='/feedback/edit' element={<UpdateFeedback />} />
         <Route path='/feedback/packages' element={<ShowPackagesFeedbacks />} />
-        <Route path='/feedback/istructors' element={<ShwInstructorsFeedbacks />} />
+        <Route path='/feedback/instructors' element={<ShwInstructorsFeedbacks />} />
         {/* <Route path='/feedback' element={<Users />} /> */}
         {/* <Route path='/feedback' element={<Users />} /> */}
         {/* <Route path='/feedback' element={<Users />} /> */}

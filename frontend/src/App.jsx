@@ -3,20 +3,20 @@ import './App.css';
 
 function App() {
   return (
-    <div className="flex flex-col gap-[25px]">
-      <a className='p-3 bg-green-500 text-center text-slate-100' href="/feedback">
+    <div className="flex flex-col gap-[25px] min-h-screen p-20 bg-slate-800">
+      <a className='p-3 flex-1 bg-green-500 text-center text-slate-100' href="/feedback">
         Feedbacks
       </a>
-      <a className='p-3 bg-green-500 text-center text-slate-100' href="/feedback/packages">
-        Show Istructor Feedbacks
+      <a className='p-3 flex-1 bg-green-500 text-center text-slate-100' href="/feedback/packages">
+        Show Instructor Feedbacks
       </a>
-      <a className='p-3 bg-green-500 text-center text-slate-100' href="/feedback/istructors">
+      <a className='p-3 flex-1 bg-green-500 text-center text-slate-100' href="/feedback/istructors">
         Show Packages Feedbacks
       </a>
-      <a className='p-3 bg-green-500 text-center text-slate-100' href={`/admin/feedback/${'istructors'}`}>
-        Admin Show Istructor Feedbacks
+      <a className='p-3 flex-1 bg-green-500 text-center text-slate-100' href={`/admin/feedback/${'instructors'}`}>
+        Admin Show Instructor Feedbacks
       </a>
-      <a className='p-3 bg-green-500 text-center text-slate-100' href={`/admin/feedback/${'packages'}`}>
+      <a className='p-3 flex-1 bg-green-500 text-center text-slate-100' href={`/admin/feedback/${'packages'}`}>
         Admin Show Packages Feedbacks
       </a>
     </div>
