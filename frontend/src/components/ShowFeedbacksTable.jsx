@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { packageReviews, instructorReviews } from '../temp/data';
+import { SearchBar } from './SearchBar';
 
 const TableHead = ({ content }) => {
   return (
-    <div className='flex items-center p-1 rounded-lg bg-yellow-600'>
+    <div className='w-full flex items-center p-1 rounded-lg bg-yellow-600'>
       {content.map((element, index) => (
         <div key={index} className={` ${ element == 'Feedback' ? 'flex-[3]' : 'flex-1' } flex justify-center items-center font-semibold text-slate-50`}>
           {element}
@@ -19,7 +20,7 @@ const TableData = ({ content }) => {
   return (
     <div className='flex flex-col w-full gap-2 mt-2'>
       {content.map((element, index) => (
-        <div key={index} className={` ${ element.type == 'complaint' ? 'border-red-600' : ''} ${ element.type == 'suggestion' ? 'border-lime-600' : ''} ${ element.type == 'question' ? 'border-blue-600' : ''} flex items-center p-1 rounded-2xl border `}>
+        <div key={index} className={` ${ element.type == 'complaint' ? 'outline-red-600' : ''} ${ element.type == 'suggestion' ? 'outline-lime-600' : ''} ${ element.type == 'question' ? 'outline-blue-600' : ''} flex items-center p-[6px] rounded-2xl transition-all duration-300 hover:shadow-md hover:shadow-zinc-800 outline outline-1 outline-offset-[-5px]`}>
           <div className=' flex-1 flex justify-center items-center text-[16px]'>{element.date}</div>
           <div className='flex-1 flex justify-center items-center text-[16px]'>{element.name}</div>
           <div className='flex-1 flex justify-center items-center text-[16px]'>{element.email}</div>
@@ -27,10 +28,10 @@ const TableData = ({ content }) => {
           <div className='flex-1 flex justify-center items-center text-[18px]'>{element.rate}</div>
           <div className='flex-[3] flex justify-center items-center text-[16px]'>{element.review}</div>
           <div className='flex-1 flex justify-center items-center text-[16px] gap-4'>
-            <span className={` ${ element.status == 'reject' ? 'outline outline-1 outline-offset-[-5px] outline-green-600 text-green-600' : 'bg-green-800 text-green-100' } transition-all duration-300  py-2 px-3 rounded-xl text-[1.25em] hover:shadow-lg cursor-pointer`}>
+            <span className={` ${ element.status == 'reject' ? 'outline outline-1 outline-offset-[-5px] outline-green-600 text-green-600' : 'bg-green-800 text-green-100' } transition-all duration-300 py-2 px-3 rounded-xl text-[1.25em] hover:shadow-md hover:shadow-zinc-800 cursor-pointer`}>
               <FontAwesomeIcon icon={faThumbsUp} />
             </span>
-            <span className={` ${ element.status == 'approve' ? 'outline outline-1 outline-offset-[-5px] outline-red-600 text-red-600' : 'bg-red-800 text-red-100' } transition-all duration-300  py-2 px-3 rounded-xl text-[1.25em] hover:shadow-lg cursor-pointer`}>
+            <span className={` ${ element.status == 'approve' ? 'outline outline-1 outline-offset-[-5px] outline-red-600 text-red-600' : 'bg-red-800 text-red-100' } transition-all duration-300 py-2 px-3 rounded-xl text-[1.25em] hover:shadow-md hover:shadow-zinc-800 cursor-pointer`}>
               <FontAwesomeIcon icon={faThumbsDown} />
             </span>
           </div>
@@ -90,10 +91,13 @@ export const ShowFeedbacksTable = ({ reviewType }) => {
   };
 
   return (
-    <div className='p-3 rounded-xl flex flex-col w-[75vw]'>
-      <TableHead content={tableHead} />
-      <TableData content={dataSet} />
-      <TablePagination nowIndex={thisPage - 1} totalIndex={maxPages} paginFunction={handlePagination} />
+    <div className='flex justify-center flex-col gap-6 p-10 bg-[#c7c7c72c] rounded-2xl backdrop-blur-sm items-center'>
+      <SearchBar placeholder='Search here ..' />
+      <div className='flex flex-col justify-center items-center p-3 rounded-xl bg-[#c7c7c7c4] w-[80vw]'>
+        <TableHead content={tableHead} onInput={''} />
+        <TableData content={dataSet} />
+        <TablePagination nowIndex={thisPage - 1} totalIndex={maxPages} paginFunction={handlePagination} />
+      </div>
     </div>
   );
 }
