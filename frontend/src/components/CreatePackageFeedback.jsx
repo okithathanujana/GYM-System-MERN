@@ -48,7 +48,7 @@ const CreatePackageFeedback = (reviewTypes) => {
           <div>
             <textarea className='' name="user_feedback" id="user_feedback"></textarea>
           </div>
-          <div className=''>
+          <div className='flex items-center '>
             <button className='' type="reset">Cancel</button>
             <button className='' type="submit">Submit</button>
           </div>
