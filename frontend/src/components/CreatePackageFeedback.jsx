@@ -2,10 +2,16 @@ import { React, useEffect, useState } from 'react'
 import { User } from 'react-feather';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAt } from '@fortawesome/free-solid-svg-icons';
+import { SetRate } from './SetRate';
 
 const CreatePackageFeedback = (reviewTypes) => {
   
     const packagesTypes = ['silver','gold','platinum']
+    const [rate, setRate] = useState(0);
+
+    const inputRating = (newRate) => {
+      setRate(newRate + 1);
+    }
   
     return (
       <div>
@@ -44,7 +50,9 @@ const CreatePackageFeedback = (reviewTypes) => {
                 }
             </select>
           </div>
-          <div className='w-full flex items-center relative'>rates</div>
+          <div className='w-full flex items-center justify-center relative'>
+            <SetRate rate={rate} handleRating={inputRating} />
+          </div>
           <div className='w-full flex items-center relative'>
             <textarea className='w-full outline-none hover:shadow-md hover:shadow-zinc-900 hover:outline-none border-none py-1 px-3 rounded-lg focus:shadow-md focus:shadow-zinc-900 focus:outline-none transition-all duration-500' name="user_feedback" id="user_feedback"></textarea>
           </div>

@@ -1,9 +1,9 @@
 import React from 'react'
 
-const ShwInstructorsFeedbacks = () => {
+const ShowInstructorsFeedbacks = () => {
   return (
     <div>ShwInstructorsFeedbacks</div>
   )
 }
 
-export default ShwInstructorsFeedbacks
+export default ShowInstructorsFeedbacks

@@ -10,7 +10,7 @@ import AdminShowFeedbacks from './screens/AdminShowFeedbacks';
 import CreateFeedback from  './screens/CreateFeedback';
 import UpdateFeedback from  './screens/UpdateFeedback';
 import ShowPackagesFeedbacks from  './screens/ShowPackagesFeedbacks';
-import ShwInstructorsFeedbacks from  './screens/ShwInstructorsFeedbacks';
+import ShowInstructorsFeedbacks from  './screens/ShowInstructorsFeedbacks';
 // import AdminShowFeedbacks from  '';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -21,9 +21,9 @@ root.render(
         <Route path='/feedback' element={<Feedback />} />
         <Route path='/admin/feedback/:type' element={<AdminShowFeedbacks />} />
         <Route path='/feedback/create/:type' element={<CreateFeedback />} />
-        <Route path='/feedback/edit' element={<UpdateFeedback />} />
+        <Route path='/feedback/edit/' element={<UpdateFeedback />} />
         <Route path='/feedback/packages' element={<ShowPackagesFeedbacks />} />
-        <Route path='/feedback/instructors' element={<ShwInstructorsFeedbacks />} />
+        <Route path='/feedback/instructors' element={<ShowInstructorsFeedbacks />} />
         {/* <Route path='/feedback' element={<Users />} /> */}
         {/* <Route path='/feedback' element={<Users />} /> */}
         {/* <Route path='/feedback' element={<Users />} /> */}

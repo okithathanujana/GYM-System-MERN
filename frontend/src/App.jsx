@@ -7,6 +7,9 @@ function App() {
       <a className='p-3 flex-1 bg-green-500 text-center text-slate-100' href="/feedback">
         Feedbacks
       </a>
+      <a className='p-3 flex-1 bg-green-500 text-center text-slate-100' href="/feedback/edit/">
+        Edit Feedbacks
+      </a>
       <a className='p-3 flex-1 bg-green-500 text-center text-slate-100' href="/feedback/packages">
         Show Instructor Feedbacks
       </a>
