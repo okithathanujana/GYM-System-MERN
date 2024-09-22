@@ -11,10 +11,10 @@ function App() {
         Edit Feedbacks
       </a>
       <a className='p-3 flex-1 bg-green-500 text-center text-slate-100' href="/feedback/packages">
-        Show Instructor Feedbacks
-      </a>
-      <a className='p-3 flex-1 bg-green-500 text-center text-slate-100' href="/feedback/istructors">
         Show Packages Feedbacks
+      </a>
+      <a className='p-3 flex-1 bg-green-500 text-center text-slate-100' href="/feedback/instructors">
+        Show Instructor Feedbacks
       </a>
       <a className='p-3 flex-1 bg-green-500 text-center text-slate-100' href={`/admin/feedback/${'instructors'}`}>
         Admin Show Instructor Feedbacks

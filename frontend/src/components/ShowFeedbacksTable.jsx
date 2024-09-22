@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { packageReviews, instructorReviews } from '../temp/data';
-import { SearchBar } from './SearchBar';
+import SearchBar from '../components/SearchBar';
 
 const TableHead = ({ content }) => {
   return (
