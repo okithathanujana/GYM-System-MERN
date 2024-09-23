@@ -29,15 +29,15 @@ const TableData = ({ content, deleteFeedback }) => {
           <div className='flex-1 flex justify-center items-center text-[16px]'>{element.iName}</div>
           <div className='flex-1 flex justify-center items-center text-[18px]'>{element.ifRate}</div>
           <div className='flex-[3] flex justify-center items-center text-[16px]'>{element.ifNote}</div>
-          <div className='flex-1 flex justify-center items-center text-[16px] gap-4'>
-            <span className={` ${element.status === 'reject' ? 'outline outline-1 outline-offset-[-5px] outline-green-600 text-green-600' : 'bg-green-800 text-green-100'} transition-all duration-300 py-2 px-3 rounded-xl text-[1.25em] hover:shadow-md hover:shadow-zinc-800 cursor-pointer`}>
+          <div className='flex-1 flex justify-center items-center text-[16px] gap-2'>
+            <span className={` ${element.status === 'reject' ? 'outline outline-1 outline-offset-[-5px] outline-green-600 text-green-600' : 'bg-green-800 text-green-100'} transition-all duration-300 py-2 px-3 rounded-xl text-[1.25em] hover:shadow-md hover:shadow-zinc-800 cursor-pointer hover:rounded-none z-10`}>
               <FontAwesomeIcon icon={faThumbsUp} />
             </span>
-            <span className={` ${element.status === 'approve' ? 'outline outline-1 outline-offset-[-5px] outline-red-600 text-red-600' : 'bg-red-800 text-red-100'} transition-all duration-300 py-2 px-3 rounded-xl text-[1.25em] hover:shadow-md hover:shadow-zinc-800 cursor-pointer`}>
+            <span className={` ${element.status === 'approve' ? 'outline outline-1 outline-offset-[-5px] outline-red-600 text-red-600' : 'bg-red-800 text-red-100'} transition-all duration-300 py-2 px-3 rounded-xl text-[1.25em] hover:shadow-md hover:shadow-zinc-800 cursor-pointer hover:rounded-none z-10`}>
               <FontAwesomeIcon icon={faThumbsDown} />
             </span>
             <span
-              className="bg-red-800 text-red-100 transition-all duration-300 py-2 px-3 rounded-xl text-[1.25em] hover:shadow-md hover:shadow-zinc-800 cursor-pointer"
+              className="bg-orange-900 text-orange-100 transition-all duration-300 py-2 px-3 rounded-xl text-[1.25em] hover:shadow-md hover:shadow-zinc-950 cursor-pointer hover:rounded-none z-10"
               onClick={() => deleteFeedback(element.ifID)}
             >
               <FontAwesomeIcon icon={faTrashAlt} />
