@@ -6,7 +6,7 @@ const InstructFeedbackSchema = new Schema({
     ifID: Number,
     cusName: String,
     cusEmail: String,
-    iName: Number,
+    iName: String,
     ifType: String,
     ifRate: Number,
     ifNote: String,

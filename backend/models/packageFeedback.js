@@ -6,7 +6,7 @@ const PackageFeedbackSchema = new Schema({
     pfID: Number,
     cusName: String,
     cusEmail: String,
-    pName: Number,
+    pName: String,
     pfType: String,
     pfRate: Number,
     pfNote: String,
