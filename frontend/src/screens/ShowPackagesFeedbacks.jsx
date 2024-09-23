@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import SearchBar from '../components/SearchBar'
-import PackageFeedback from '../components/PackageFeedback'
+import PackageFeedbackSilver from '../components/PackageFeedbackSilver'
+import PackageFeedbackGold from '../components/PackageFeedbackGold'
+import PackageFeedbackPlatinum from '../components/PackageFeedbackPlatinum'
 
 const ShowPackagesFeedbacks = () => {
 
@@ -13,9 +15,11 @@ const ShowPackagesFeedbacks = () => {
       <div className='flex justify-center flex-col gap-6 p-10 bg-[#c7c7c72c] rounded-2xl backdrop-blur-sm items-center'>
         <SearchBar placeholder='Search for your Instructor ..' />
         <div className='flex justify-center flex-col gap-3'>
-          <PackageFeedback gymPackage='silver' />
-          <PackageFeedback gymPackage='gold' />
-          <PackageFeedback gymPackage='platinum' />
+          <PackageFeedbackSilver/>
+          <PackageFeedbackGold/>
+          <PackageFeedbackPlatinum/>
+          {/* <PackageFeedback gymPackage='gold' />
+          <PackageFeedback gymPackage='platinum' /> */}
         </div>
         </div>
     </div>
