@@ -49,12 +49,23 @@ const CreatePackageFeedback = () => {
       pfDate: Date()
     };
 
-    console.log(feedbackData)
+    console.log(feedbackData);
     try {
       const response = await Axios.post('http://localhost:3001/api/create-package-feedback', feedbackData);
-      console.log('Feedback submitted successfully', response);
+      if (response.status === 200) {
+        alert('Successfully added package feedback!');
+        // Optionally reset form fields after submission
+        setFullName('');
+        setEmail('');
+        setPackageType('');
+        setReviewType('');
+        setFeedbackNote('');
+        setRate(0);
+        fetchMaxIdAndSetId(); // Fetch the new max ID
+      }
     } catch (error) {
       console.error('Error submitting feedback: ', error);
+      alert('An error occurred while submitting feedback. Please try again.'); // Alert on error
     }
   };
 

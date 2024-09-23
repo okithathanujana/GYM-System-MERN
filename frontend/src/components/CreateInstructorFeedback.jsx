@@ -39,7 +39,7 @@ const CreateInstructorFeedback = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     // Prepare the data to send to the API
     const feedbackData = {
       ifID: ifID,
@@ -49,19 +49,31 @@ const CreateInstructorFeedback = () => {
       ifType: reviewType,
       ifRate: rate,
       ifNote: feedbackNote,
-      ifDate: Date()
+      ifDate: Date(),
     };
-
-    console.log(feedbackData);
-
-    Axios.post('http://localhost:3001/api/create-instruct-feedback', feedbackData)
-    .then((response) => {
-        console.log('success');
-    })
-    .catch((error) => {
-        console.error('Axios Error: ', error);
-    });
-  }
+  
+    console.log('Submitting feedback:', feedbackData);
+  
+    try {
+      const response = await Axios.post('http://localhost:3001/api/create-instruct-feedback', feedbackData);
+      if (response.status === 200) {
+        alert('Successfully added instructor feedback!');
+        // Optionally reset the form here
+        setFullName('');
+        setEmail('');
+        setInstructor('');
+        setReviewType('');
+        setFeedbackNote('');
+        setRate(0);
+        // Fetch the max ID again if needed
+        fetchMaxIdAndSetId();
+      }
+    } catch (error) {
+      console.error('Error submitting feedback:', error);
+      alert('An error occurred while submitting feedback. Please try again.'); // Alert on error
+    }
+  };
+  
 
   return (
     <div>
