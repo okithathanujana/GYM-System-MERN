@@ -8,7 +8,8 @@ const path = require('path');
 dotenv.config();
 
 
-//const feedbackRouter = require('./routes/feedbackRouter');
+const instructFeedbacksRouter = require('./routes/instructFeedbackRouter');
+const packageFeedbackRouter = require('./routes/packageFeedbackRouter');
 
 const app = express();
 
@@ -30,7 +31,7 @@ const connectDB = async () => {
 
 connectDB();
 
-//app.use('/api', feedbackRouter);
+app.use('/api', instructFeedbacksRouter,packageFeedbackRouter);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
