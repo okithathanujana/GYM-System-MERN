@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import SearchBar from '../components/SearchBar';
+import SearchBar from './SearchBar';
 
 const TableHead = ({ content }) => {
   return (
@@ -19,15 +19,15 @@ const TableData = ({ content }) => {
   return (
     <div className='flex flex-col w-full gap-2 mt-2'>
       {content.map((element, index) => (
-        <div key={index} className={` ${element.pfType === 'complaint' ? 'outline-red-600' : ''} ${element.pfType === 'suggestion' ? 'outline-lime-600' : ''} ${element.pfType === 'question' ? 'outline-blue-600' : ''} flex items-center p-[6px] rounded-2xl transition-all duration-300 hover:shadow-md hover:shadow-zinc-800 outline outline-1 outline-offset-[-5px]`}>
+        <div key={index} className={` ${element.ifType === 'complaint' ? 'outline-red-600' : ''} ${element.ifType === 'suggestion' ? 'outline-lime-600' : ''} ${element.ifType === 'question' ? 'outline-blue-600' : ''} flex items-center p-[6px] rounded-2xl transition-all duration-300 hover:shadow-md hover:shadow-zinc-800 outline outline-1 outline-offset-[-5px]`}>
           <div className='flex-1 flex justify-center items-center text-[16px]'>
-            {new Date(element.pfDate).toLocaleDateString()} {/* Format date here */}
+            {new Date(element.ifDate).toLocaleDateString()} {/* Format date here */}
           </div>
           <div className='flex-1 flex justify-center items-center text-[16px]'>{element.cusName}</div>
           <div className='flex-1 flex justify-center items-center text-[16px]'>{element.cusEmail}</div>
-          <div className='flex-1 flex justify-center items-center text-[16px]'>{element.pName}</div>
-          <div className='flex-1 flex justify-center items-center text-[18px]'>{element.pfRate}</div>
-          <div className='flex-[3] flex justify-center items-center text-[16px]'>{element.pfNote}</div>
+          <div className='flex-1 flex justify-center items-center text-[16px]'>{element.iName}</div>
+          <div className='flex-1 flex justify-center items-center text-[18px]'>{element.ifRate}</div>
+          <div className='flex-[3] flex justify-center items-center text-[16px]'>{element.ifNote}</div>
           <div className='flex-1 flex justify-center items-center text-[16px] gap-4'>
             <span className={` ${element.status === 'reject' ? 'outline outline-1 outline-offset-[-5px] outline-green-600 text-green-600' : 'bg-green-800 text-green-100'} transition-all duration-300 py-2 px-3 rounded-xl text-[1.25em] hover:shadow-md hover:shadow-zinc-800 cursor-pointer`}>
               <FontAwesomeIcon icon={faThumbsUp} />
@@ -63,12 +63,12 @@ const TablePagination = ({ nowIndex, totalIndex, paginFunction }) => {
   );
 };
 
-export const ShowFeedbacksTable = ({ reviewType }) => {
+export const ShowFeedbacksInstructTable = ({ reviewType }) => {
   const [thisPage, setThisPage] = useState(1);
   const [packageReviews, setPackageReviews] = useState([]);
   
   useEffect(() => {
-    fetch('http://localhost:3001/api/package-feedbacks')
+    fetch('http://localhost:3001/api/instruct-feedbacks')
       .then(response => response.json())
       .then(data => {
         setPackageReviews(data.response); // Update state with fetched data

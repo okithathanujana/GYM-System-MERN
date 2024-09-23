@@ -10,6 +10,7 @@ const InstructFeedbackSchema = new Schema({
     ifType: String,
     ifRate: Number,
     ifNote: String,
+    ifDate: Date,
 });
 
 const InstructFeedback = mongoose.model('InstructFeedback',InstructFeedbackSchema);

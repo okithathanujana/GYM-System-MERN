@@ -48,7 +48,8 @@ const CreateInstructorFeedback = () => {
       iName: instructor,
       ifType: reviewType,
       ifRate: rate,
-      ifNote: feedbackNote
+      ifNote: feedbackNote,
+      ifDate: Date()
     };
 
     console.log(feedbackData);

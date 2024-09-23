@@ -1,6 +1,7 @@
 import { React, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import { ShowFeedbacksTable } from '../components/ShowFeedbacksTable';
+import { ShowFeedbacksInstructTable } from '../components/ShowFeedbacksInstructTable';
 
 const AdminShowFeedbacks = () => {
 
@@ -17,8 +18,13 @@ const AdminShowFeedbacks = () => {
 
   return (
     <div className='flex w-screen h-screen bg-cover bg-center bg-no-repeat justify-center items-center' style={{ backgroundImage: `url(${bgImageURL})` }}>
+        {type === 'packages' ? (
           <ShowFeedbacksTable reviewType={type} />
-    </div>
+        ) : (
+          <ShowFeedbacksInstructTable reviewType={type} />
+        )}
+      </div>
+
   )
 }
 

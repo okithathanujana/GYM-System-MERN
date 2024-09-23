@@ -43,7 +43,7 @@ const getSelectedFeedback = (req, res, next) => {
 };
 //Create new Feedback
 const addFeedback = (req, res, next) => {
-    const { ifID, cusName, cusEmail, iName, ifType, ifRate, ifNote } = req.body;
+    const { ifID, cusName, cusEmail, iName, ifType, ifRate, ifNote, ifDate } = req.body;
 
     const feedback = new Feedback({
         ifID: ifID,
@@ -53,6 +53,7 @@ const addFeedback = (req, res, next) => {
         ifType: ifType,
         ifRate: ifRate,
         ifNote: ifNote,
+        ifDate: ifDate,
     });
 
     feedback.save()
@@ -67,9 +68,9 @@ const addFeedback = (req, res, next) => {
 
 //Update existing Feedback Details
 const updateFeedback = (req, res, next) => {
-    const { ifID, cusName, cusEmail, iName, ifType, ifRate, ifNote } = req.body;
+    const { ifID, cusName, cusEmail, iName, ifType, ifRate, ifNote, ifDate } = req.body;
     
-    Feedback.updateOne({ ifID: ifID }, { $set: { cusName: cusName, cusEmail: cusEmail, iName: iName, ifType: ifType, ifRate: ifRate, ifNote:ifNote } })
+    Feedback.updateOne({ ifID: ifID }, { $set: { cusName: cusName, cusEmail: cusEmail, iName: iName, ifType: ifType, ifRate: ifRate, ifNote:ifNote, ifDate:ifDate } })
         .then(response => {
             res.json({ response })
         })

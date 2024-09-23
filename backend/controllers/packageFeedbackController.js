@@ -43,7 +43,7 @@ const getSelectedFeedback = (req, res, next) => {
 };
 //Create new Feedback
 const addFeedback = (req, res, next) => {
-    const { pfID, cusName, cusEmail, pName, pfType, pfRate, pfNote } = req.body;
+    const { pfID, cusName, cusEmail, pName, pfType, pfRate, pfNote, pfDate } = req.body;
 
     const feedback = new Feedback({
         pfID: pfID,
@@ -53,6 +53,7 @@ const addFeedback = (req, res, next) => {
         pfType: pfType,
         pfRate: pfRate,
         pfNote: pfNote,
+        pfDate: pfDate,
     });
 
     feedback.save()
@@ -67,9 +68,9 @@ const addFeedback = (req, res, next) => {
 
 //Update existing Feedback Details
 const updateFeedback = (req, res, next) => {
-    const { pfID, cusName, cusEmail, pName, pfType, pfRate, pfNote } = req.body;
+    const { pfID, cusName, cusEmail, pName, pfType, pfRate, pfNote, pfDate } = req.body;
     
-    Feedback.updateOne({ pfID: pfID }, { $set: { cusName: cusName, cusEmail: cusEmail, pName: pName, pfType: pfType, pfRate: pfRate, pfNote:pfNote } })
+    Feedback.updateOne({ pfID: pfID }, { $set: { cusName: cusName, cusEmail: cusEmail, pName: pName, pfType: pfType, pfRate: pfRate, pfNote:pfNote, pfDate:pfDate } })
         .then(response => {
             res.json({ response })
         })

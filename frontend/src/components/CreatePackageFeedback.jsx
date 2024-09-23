@@ -46,6 +46,7 @@ const CreatePackageFeedback = () => {
       pfType: reviewType,
       pfNote: feedbackNote,
       pfRate: rate,
+      pfDate: Date()
     };
 
     console.log(feedbackData)

@@ -10,6 +10,7 @@ const PackageFeedbackSchema = new Schema({
     pfType: String,
     pfRate: Number,
     pfNote: String,
+    pfDate: Date,
 });
 
 const PackageFeedback = mongoose.model('PackageFeedback',PackageFeedbackSchema);
