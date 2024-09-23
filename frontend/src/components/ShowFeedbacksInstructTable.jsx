@@ -22,7 +22,7 @@ const TableData = ({ content, deleteFeedback }) => {
       {content.map((element, index) => (
         <div key={index} className={` ${element.ifType === 'complaint' ? 'outline-red-600' : ''} ${element.ifType === 'suggestion' ? 'outline-lime-600' : ''} ${element.ifType === 'question' ? 'outline-blue-600' : ''} flex items-center p-[6px] rounded-2xl transition-all duration-300 hover:shadow-md hover:shadow-zinc-800 outline outline-1 outline-offset-[-5px]`}>
           <div className='flex-1 flex justify-center items-center text-[16px]'>
-            {new Date(element.ifDate).toLocaleDateString()} {/* Format date here */}
+            {new Date(element.ifDate).toLocaleDateString()}
           </div>
           <div className='flex-1 flex justify-center items-center text-[16px]'>{element.cusName}</div>
           <div className='flex-1 flex justify-center items-center text-[16px]'>{element.cusEmail}</div>
@@ -38,7 +38,7 @@ const TableData = ({ content, deleteFeedback }) => {
             </span>
             <span
               className="bg-red-800 text-red-100 transition-all duration-300 py-2 px-3 rounded-xl text-[1.25em] hover:shadow-md hover:shadow-zinc-800 cursor-pointer"
-              onClick={() => deleteFeedback(element.ifID)} // Assuming ifID is the unique identifier
+              onClick={() => deleteFeedback(element.ifID)}
             >
               <FontAwesomeIcon icon={faTrashAlt} />
             </span>
@@ -72,13 +72,14 @@ const TablePagination = ({ nowIndex, totalIndex, paginFunction }) => {
 export const ShowFeedbacksInstructTable = ({ reviewType }) => {
   const [thisPage, setThisPage] = useState(1);
   const [packageReviews, setPackageReviews] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetch('http://localhost:3001/api/instruct-feedbacks')
       .then(response => response.json())
       .then(data => {
-        setPackageReviews(data.response); // Update state with fetched data
-        console.log(data.response); // Log the fetched data
+        setPackageReviews(data.response);
+        console.log(data.response);
       })
       .catch(error => {
         console.error('Error fetching package feedbacks:', error);
@@ -90,7 +91,7 @@ export const ShowFeedbacksInstructTable = ({ reviewType }) => {
     Axios.post('http://localhost:3001/api/delete-instruct-feedback', payload)
       .then(response => {
         alert('Successfully deleted');
-        setPackageReviews(prevReviews => prevReviews.filter(review => review.ifID !== ifID)); // Update state to remove deleted feedback
+        setPackageReviews(prevReviews => prevReviews.filter(review => review.ifID !== ifID));
       })
       .catch(error => {
         console.error('Error deleting feedback:', error);
@@ -99,9 +100,14 @@ export const ShowFeedbacksInstructTable = ({ reviewType }) => {
 
   const tableHead = ['Date', 'Customer', 'Email', reviewType === 'instructors' ? 'Instructor' : 'Package', 'Rating', 'Feedback', 'Actions'];
   const maxRows = 5;
-  const maxPages = Math.ceil(packageReviews.length / maxRows);
+  const filteredReviews = packageReviews.filter(review => {
+    return review.cusName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+           review.cusEmail.toLowerCase().includes(searchTerm.toLowerCase()) ||
+           review.ifNote.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+  const maxPages = Math.ceil(filteredReviews.length / maxRows);
   
-  const dataSet = packageReviews.slice(
+  const dataSet = filteredReviews.slice(
     (thisPage - 1) * maxRows,
     thisPage * maxRows
   );
@@ -116,9 +122,13 @@ export const ShowFeedbacksInstructTable = ({ reviewType }) => {
     }
   };
 
+  const handleSearch = (input) => {
+    setSearchTerm(input);
+  };
+
   return (
     <div className='flex justify-center flex-col gap-6 p-10 bg-[#c7c7c72c] rounded-2xl backdrop-blur-sm items-center'>
-      <SearchBar placeholder='Search here ..' />
+      <SearchBar placeholder='Search here ..' onInput={handleSearch} />
       <div className='flex flex-col justify-center items-center p-3 rounded-xl bg-[#c7c7c7c4] w-[80vw]'>
         <TableHead content={tableHead} />
         <TableData content={dataSet} deleteFeedback={deleteFeedback} />
