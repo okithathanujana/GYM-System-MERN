@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp, faThumbsDown, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faThumbsDown, faChevronLeft, faChevronRight, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import SearchBar from './SearchBar';
+import Axios from 'axios';
 
 const TableHead = ({ content }) => {
   return (
     <div className='w-full flex items-center p-1 rounded-lg bg-yellow-600'>
       {content.map((element, index) => (
-        <div key={index} className={` ${ element === 'Feedback' ? 'flex-[3]' : 'flex-1' } flex justify-center items-center font-semibold text-slate-50`}>
+        <div key={index} className={` ${element === 'Feedback' ? 'flex-[3]' : 'flex-1'} flex justify-center items-center font-semibold text-slate-50`}>
           {element}
         </div>
       ))}
@@ -15,7 +16,7 @@ const TableHead = ({ content }) => {
   );
 };
 
-const TableData = ({ content }) => {
+const TableData = ({ content, deleteFeedback }) => {
   return (
     <div className='flex flex-col w-full gap-2 mt-2'>
       {content.map((element, index) => (
@@ -35,13 +36,18 @@ const TableData = ({ content }) => {
             <span className={` ${element.status === 'approve' ? 'outline outline-1 outline-offset-[-5px] outline-red-600 text-red-600' : 'bg-red-800 text-red-100'} transition-all duration-300 py-2 px-3 rounded-xl text-[1.25em] hover:shadow-md hover:shadow-zinc-800 cursor-pointer`}>
               <FontAwesomeIcon icon={faThumbsDown} />
             </span>
+            <span
+              className="bg-red-800 text-red-100 transition-all duration-300 py-2 px-3 rounded-xl text-[1.25em] hover:shadow-md hover:shadow-zinc-800 cursor-pointer"
+              onClick={() => deleteFeedback(element.ifID)} // Assuming ifID is the unique identifier
+            >
+              <FontAwesomeIcon icon={faTrashAlt} />
+            </span>
           </div>
         </div>
       ))}
     </div>
   );
 };
-
 
 const TablePagination = ({ nowIndex, totalIndex, paginFunction }) => {
   const paginBtns = [];
@@ -66,7 +72,7 @@ const TablePagination = ({ nowIndex, totalIndex, paginFunction }) => {
 export const ShowFeedbacksInstructTable = ({ reviewType }) => {
   const [thisPage, setThisPage] = useState(1);
   const [packageReviews, setPackageReviews] = useState([]);
-  
+
   useEffect(() => {
     fetch('http://localhost:3001/api/instruct-feedbacks')
       .then(response => response.json())
@@ -78,6 +84,18 @@ export const ShowFeedbacksInstructTable = ({ reviewType }) => {
         console.error('Error fetching package feedbacks:', error);
       });
   }, []);
+
+  const deleteFeedback = (ifID) => {
+    const payload = { ifID };
+    Axios.post('http://localhost:3001/api/delete-instruct-feedback', payload)
+      .then(response => {
+        alert('Successfully deleted');
+        setPackageReviews(prevReviews => prevReviews.filter(review => review.ifID !== ifID)); // Update state to remove deleted feedback
+      })
+      .catch(error => {
+        console.error('Error deleting feedback:', error);
+      });
+  };
 
   const tableHead = ['Date', 'Customer', 'Email', reviewType === 'instructors' ? 'Instructor' : 'Package', 'Rating', 'Feedback', 'Actions'];
   const maxRows = 5;
@@ -103,7 +121,7 @@ export const ShowFeedbacksInstructTable = ({ reviewType }) => {
       <SearchBar placeholder='Search here ..' />
       <div className='flex flex-col justify-center items-center p-3 rounded-xl bg-[#c7c7c7c4] w-[80vw]'>
         <TableHead content={tableHead} />
-        <TableData content={dataSet} />
+        <TableData content={dataSet} deleteFeedback={deleteFeedback} />
         <TablePagination nowIndex={thisPage - 1} totalIndex={maxPages} paginFunction={handlePagination} />
       </div>
     </div>
