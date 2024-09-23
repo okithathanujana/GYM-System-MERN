@@ -95,7 +95,7 @@ const CreateInstructorFeedback = () => {
         <div className='w-full flex items-center relative'>
           <input
             className='w-full hover:shadow-md hover:shadow-zinc-900 hover:outline-none relative py-1 px-3 pr-10 rounded-lg focus:shadow-md focus:shadow-zinc-900 focus:outline-none transition-all duration-500'
-            type="text"
+            type="email"
             name="user_email"
             id="user_email"
             placeholder='Email . . .'
